@@ -1,8 +1,6 @@
 Install-PackageProvider -Name "NuGet" -Force
 Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
 
-irm asheroto.com/winget | iex
-
 function Update-Environment-Path {
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 }
@@ -44,23 +42,14 @@ git config --global alias.everything "! git pull && git submodule update --init 
 git config --global alias.aliases "config --get-regexp alias"
 
 
-# PowerShell Tooling for Git
-Install-Module posh-git -Force -Scope CurrentUser
-Install-Module oh-my-posh -Force -Scope CurrentUser
-Set-Prompt
-Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck
-Add-Content $PROFILE "`nImport-Module posh-git`nImport-Module oh-my-posh`nSet-PoshPrompt pararussel"
-
-
-# Font to support PowerShell Tooling:
-git clone https://github.com/ryanoasis/nerd-fonts.git  --depth 1
-cd nerd-fonts
-.\install.ps1
-cd ..\
-Write-Output 'Update windows terminal font: "fontFace": "MesloLGM NF"'
+# OhMyPosh Setup
+winget install JanDeDobbeleer.OhMyPosh -s winget --accept-source-agreements --accept-package-agreements
+Add-Content $PROFILE "`noh-my-posh init pwsh | Invoke-Expression"
+oh-my-posh init pwsh --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/pararussel.omp.json' | Invoke-Expression
 
 # Node
 winget install -e --id OpenJS.NodeJS --accept-source-agreements --accept-package-agreements
+
 Update-Environment-Path
 npm install --global --production npm-windows-upgrade
 npm-windows-upgrade --npm-version latest
@@ -83,8 +72,19 @@ winget install -e --id Microsoft.DotNet.SDK.5 --accept-source-agreements --accep
 winget install -e --id Microsoft.DotNet.SDK.6 --accept-source-agreements --accept-package-agreements
 winget install -e --id Microsoft.DotNet.SDK.7 --accept-source-agreements --accept-package-agreements
 winget install -e --id Microsoft.WindowsTerminal --accept-source-agreements --accept-package-agreements
+
 Update-Environment-Path
 
 bash.exe vscode-extensions.sh
 wsl --install
 Write-Output "Finished!🚀"
+
+
+
+# Font to support PowerShell Tooling:
+git clone https://github.com/ryanoasis/nerd-fonts.git  --depth 1
+cd nerd-fonts
+.\install.ps1
+cd ..\
+Write-Output 'Update windows terminal font: "fontFace": "MesloLGM NF"'
+
