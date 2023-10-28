@@ -20,13 +20,14 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 Update-Environment-Path
 
 choco install firacode --yes # See https://www.youtube.com/watch?v=KI6m_B1f8jc
+choco install winbtrfs --yes
 
 # Utils
 Get-Command -Module Microsoft.PowerShell.Archive
 
-winget install -e --id Git.Git
-winget install -e --id SaaSGroup.Tower
-winget install -e --id GitHub.GitHubDesktop
+winget install -e --id Git.Git  --accept-source-agreements --accept-package-agreements
+winget install -e --id SaaSGroup.Tower --accept-source-agreements --accept-package-agreements
+winget install -e --id GitHub.GitHubDesktop --accept-source-agreements --accept-package-agreements
 
 Update-Environment-Path
 
@@ -59,7 +60,7 @@ cd ..\
 Write-Output 'Update windows terminal font: "fontFace": "MesloLGM NF"'
 
 # Node
-winget install -e --id OpenJS.NodeJS
+winget install -e --id OpenJS.NodeJS --accept-source-agreements --accept-package-agreements
 Update-Environment-Path
 npm install --global --production npm-windows-upgrade
 npm-windows-upgrade --npm-version latest
@@ -68,21 +69,20 @@ npm-windows-upgrade --npm-version latest
 Enable-WindowsOptionalFeature -Online -FeatureName:Microsoft-Hyper-V -All -NoRestart
 
 # Software
-winget install -e --id Google.Chrome
-winget install -e --id Mozilla.Firefox
-winget install -e --id VideoLAN.VLC
-winget install -e --id Valve.Steam
-winget install -e --id Discord.Discord
-winget install -e --id Obsidian.Obsidian
+winget install -e --id Google.Chrome --accept-source-agreements --accept-package-agreements
+winget install -e --id Mozilla.Firefox --accept-source-agreements --accept-package-agreements
+winget install -e --id VideoLAN.VLC --accept-source-agreements --accept-package-agreements
+winget install -e --id Valve.Steam --accept-source-agreements --accept-package-agreements
+winget install -e --id Discord.Discord --accept-source-agreements --accept-package-agreements
+winget install -e --id Obsidian.Obsidian --accept-source-agreements --accept-package-agreements
 
-
-winget install -e --id Docker.DockerDesktop
-winget install -e --id Unity.UnityHub
-winget install -e --id Microsoft.VisualStudioCode
-winget install -e --id Microsoft.DotNet.SDK.5
-winget install -e --id Microsoft.DotNet.SDK.6
-winget install -e --id Microsoft.DotNet.SDK.7
-winget install -e --id Microsoft.WindowsTerminal
+winget install -e --id Docker.DockerDesktop --accept-source-agreements --accept-package-agreements
+winget install -e --id Unity.UnityHub --accept-source-agreements --accept-package-agreements
+winget install -e --id Microsoft.VisualStudioCode --accept-source-agreements --accept-package-agreements
+winget install -e --id Microsoft.DotNet.SDK.5 --accept-source-agreements --accept-package-agreements
+winget install -e --id Microsoft.DotNet.SDK.6 --accept-source-agreements --accept-package-agreements
+winget install -e --id Microsoft.DotNet.SDK.7 --accept-source-agreements --accept-package-agreements
+winget install -e --id Microsoft.WindowsTerminal --accept-source-agreements --accept-package-agreements
 Update-Environment-Path
 
 bash.exe vscode-extensions.sh
