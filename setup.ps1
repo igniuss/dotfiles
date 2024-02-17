@@ -41,12 +41,6 @@ git config --global alias.ammend "commit -a --amend"
 git config --global alias.everything "! git pull && git submodule update --init --recursive"
 git config --global alias.aliases "config --get-regexp alias"
 
-
-# OhMyPosh Setup
-winget install JanDeDobbeleer.OhMyPosh -s winget --accept-source-agreements --accept-package-agreements
-Add-Content $PROFILE "`noh-my-posh init pwsh | Invoke-Expression"
-oh-my-posh init pwsh --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/pararussel.omp.json' | Invoke-Expression
-
 # Node
 winget install -e --id OpenJS.NodeJS --accept-source-agreements --accept-package-agreements
 
@@ -73,10 +67,21 @@ winget install -e --id Microsoft.DotNet.SDK.6 --accept-source-agreements --accep
 winget install -e --id Microsoft.DotNet.SDK.7 --accept-source-agreements --accept-package-agreements
 winget install -e --id Microsoft.WindowsTerminal --accept-source-agreements --accept-package-agreements
 
+winget install -e --id Rustlang.Rustup --accept-source-agreements --accept-package-agreements
 Update-Environment-Path
 
+# Install rust toolchain
+rustup update
+Update-Environment-Path
+
+cargo install starship bat eza dotter fend git-cliff grex hyperfine just krabby macchina oxker zoxide --locked
+
+macchina
+
 bash.exe vscode-extensions.sh
+
 wsl --install
+
 Write-Output "Finished!🚀"
 
 
@@ -86,5 +91,5 @@ git clone https://github.com/ryanoasis/nerd-fonts.git  --depth 1
 cd nerd-fonts
 .\install.ps1
 cd ..\
-Write-Output 'Update windows terminal font: "fontFace": "MesloLGM NF"'
 
+Write-Output 'Update windows terminal font: "fontFace": "MesloLGM NF"'
