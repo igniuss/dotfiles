@@ -4,5 +4,10 @@
 depends = []
 
 [default.files]
+".bashrc" = "~/.bashrc"
+".config/starship.toml" = "~/.config/starship.toml"
+"gitconfigs/.gitconfig" = "~/.gitconfig"
+"gitconfigs/.gitconfig-personal" = "~/.gitconfig-personal"
+"gitconfigs/.gitconfig-work" = "~/.gitconfig-work"
 
 [default.variables]

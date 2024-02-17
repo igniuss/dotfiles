@@ -1,0 +1,43 @@
+[includeIf "gitdir:~/projects/works"]
+    path = .gitconfig-work
+[includeIf "gitdir:~/projects/personal"]
+    path = .gitconfig-personal
+
+[core]
+	editor = code --wait
+	compression = 0
+	packedGitLimit = 512m 
+	packedGitWindowSize = 512m 
+	autocrlf = false
+	sshCommand = 'C:/Windows/System32/OpenSSH/ssh.exe'
+[pack] 
+	deltaCacheSize = 2047m 
+	packSizeLimit = 2047m 
+	windowMemory = 2047m
+[init]
+	defaultBranch = main
+[alias]
+	pom = pull origin main
+	pod = pull origin develop
+	last = log -1 HEAD
+	ls = log --pretty=format:'%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]' --decorate --date=short --graph
+	standup = log --since yesterday --author  --pretty=short
+	ammend = commit -a --amend
+	everything = ! git pull && git submodule update --init --recursive
+	aliases = config --get-regexp alias
+
+[includeIf "gitdir:~/projects/work/"]
+    path = ~/.ssh/.gitconfig-work
+[includeIf "gitdir:~/projects/personal/"]
+    path = ~/.ssh/.gitconfig-personal
+
+[http]
+	postBuffer = 524288000
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = Sean L.
+	email = slava_be@hotmail.com

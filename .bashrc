@@ -3,5 +3,7 @@ krabby random
 
 [ -f ~/.inshellisense/key-bindings.bash ] && source ~/.inshellisense/key-bindings.bash
 
+
+
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
