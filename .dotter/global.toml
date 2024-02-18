@@ -9,5 +9,5 @@ depends = []
 "gitconfigs/.gitconfig" = "~/.gitconfig"
 "gitconfigs/.gitconfig-personal" = "~/.gitconfig-personal"
 "gitconfigs/.gitconfig-work" = "~/.gitconfig-work"
-
+".glaze-wm/"="~/.glaze-wm/"
 [default.variables]
