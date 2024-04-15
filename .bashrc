@@ -6,4 +6,7 @@ krabby random
 
 
 eval "$(starship init bash)"
-eval "$(zoxide init bash)"
+eval "$(zoxide init bash)"eval "$(atuin init bash)"
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"
+ble/util/import/eval-after-load core-complete 'ble/array#remove _ble_complete_auto_source atuin-history'
