@@ -1,20 +1,20 @@
 [helpers]
 
 [default]
-depends = ["shell", "cargo"]
+depends = ["shell", "cargo", "bash"]
 
 [default.files]
-".glaze-wm/"="~/.glaze-wm/"
+".glaze-wm/" = "~/.glaze-wm/"
 
 [default.variables]
 
 [shell.files]
 ".config/starship.toml" = "~/.config/starship.toml"
-# "atuin.toml" =  { type="symbolic", target="~/.config/atuin/config.toml", if='(is_executable "atuin"'}
 "gitconfigs/.gitconfig" = "~/.gitconfig"
 "gitconfigs/.gitconfig-personal" = "~/.gitconfig-personal"
 "gitconfigs/.gitconfig-work" = "~/.gitconfig-work"
-"atuin.toml" = { type = "symbolic", target = "~/.config/atuin/config.toml", if = '(is_executable "atuin")'}
+"atuin.toml" = { type = "symbolic", target = "~/.config/atuin/config.toml", if = '(is_executable "atuin")' }
+
 [bash]
 depends = ["shell"]
 

@@ -39,13 +39,13 @@ focus_borders:
 general:
   # Whether to show floating windows as always on top.
   show_floating_on_top: true
-  window_animations: true
+  # window_animations: true
 bar:
   height: "30px"
   position: "top"
   opacity: 1.0
   background: *crust
-  foreground: *lavender
+  foreground: *text
   font_family: "Iosevka Nerd Font"
   font_size: "13px"
   padding: "4px 6px"
@@ -56,13 +56,13 @@ bar:
     - type: "workspaces"
       # current active workspace
       focused_workspace_background: *crust
-      focused_workspace_foreground: *sky
+      focused_workspace_foreground: *red
       # inactive, but displayed on other monitor workspace
       displayed_workspace_background: "transparent"
       displayed_workspace_foreground: *subtext1
       # inactive workspace
       default_workspace_background: "transparent"
-      margin: "0px 10px 0px 0px"
+      margin: "0px 10px 0px 5px"
   components_center:
     - type: "window title"
   components_right:
@@ -78,8 +78,8 @@ bar:
       padding: "0 8px"
       margin: "0 4px"
     - type: "clock"
-      foreground: *lavender
-      time_formatting: "ddd MMM d hh:mm:ss tt  "
+      # foreground: *lavender
+      time_formatting: "ddd MMM d HH:mm:ss tt  "
       margin: "0 0 0 10px"
     - type: "weather"
       latitude: 59.260860
@@ -106,7 +106,7 @@ workspaces:
   - name: "4"
     display_name: "4) 🖥 workspace"
   - name: "5"
-    display_name: "5) 🎵 multimedia"
+    display_name: "5) 📔 notes"
   - name: "6"
     display_name: "6)"
   - name: "7"
@@ -165,13 +165,13 @@ keybindings:
 
   # Move focused window in a given direction.
   - command: "move left"
-    bindings: ["Alt+Shift+H", "Alt+Shift+Left"]
+    bindings: ["Alt+Shift+H"]
   - command: "move right"
-    bindings: ["Alt+Shift+L", "Alt+Shift+Right"]
+    bindings: ["Alt+Shift+L"]
   - command: "move up"
-    bindings: ["Alt+Shift+K", "Alt+Shift+Up"]
+    bindings: ["Alt+Shift+K"]
   - command: "move down"
-    bindings: ["Alt+Shift+J", "Alt+Shift+Down"]
+    bindings: ["Alt+Shift+J"]
 
   # Resize focused window by a percentage or pixel amount.
   - command: "resize width -2%"
@@ -283,4 +283,4 @@ keybindings:
   - commands: ["move to workspace 8", "focus workspace 8"]
     binding: "Alt+Shift+8"
   - commands: ["move to workspace 9", "focus workspace 9"]
-    bindings: ["Alt+Shift+9"]
+    bindings: ["Alt+Shift+9", "Alt+Shift+0"]
