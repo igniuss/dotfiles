@@ -1,168 +1,121 @@
-define: &bar_primary '#181825'
-define: &bar_secondary '#eba0ac'
-define: &bar_text '#cdd6f4'
+rosewater: &rosewater "#f5e0dc"
+flamingo: &flamingo "#f2cdcd"
+pink: &pink "#f5c2e7"
+mauve: &mauve "#cba6f7"
+red: &red "#f38ba8"
+maroon: &maroon "#eba0ac"
+peach: &peach "#fab387"
+yellow: &yellow "#f9e2af"
+green: &green "#a6e3a1"
+teal: &teal "#94e2d5"
+sky: &sky "#89dceb"
+sapphire: &sapphire "#74c7ec"
+blue: &blue "#89b4fa"
+lavender: &lavender "#b4befe"
+text: &text "#cdd6f4"
+subtext1: &subtext1 "#bac2de"
+subtext0: &subtext0 "#a6adc8"
+overlay2: &overlay2 "#9399b2"
+overlay1: &overlay1 "#7f849c"
+overlay0: &overlay0 "#6c7086"
+surface2: &surface2 "#585b70"
+surface1: &surface1 "#45475a"
+surface0: &surface0 "#313244"
+base: &base "#1e1e2e"
+mantle: &mantle "#181825"
+crust: &crust "#11111b"
 
-
-general:
-  # Whether to automatically focus windows underneath the cursor.
-  focus_follows_cursor: true
-
-  # Whether to jump the cursor between windows focused by the WM.
-  cursor_follows_focus: true
-
-  # Whether to switch back and forth between the previously focused workspace
-  # when focusing the current workspace.
-  toggle_workspace_on_refocus: true
-
-  # Whether to show floating windows as always on top.
-  show_floating_on_top: true
-
-  # Amount to move floating windows by (eg. when using `alt+<hjkl>` on a floating window)
-  floating_window_move_amount: "5%"
-
-  # Whether to center new floating windows.
-  center_new_floating_windows: true
-
-  # *Strongly* recommended to set to 'false'. Whether to globally enable/disable
-  # window transition animations (on minimize, close, etc). Set to 'unchanged'
-  # to make no setting changes.
-  window_animations: false
 
 gaps:
-  # Gap between adjacent windows.
-  inner_gap: "10px"
-
-  # Gap between windows and the screen edge.
-  outer_gap: "10px"
-
-# Highlight active/inactive windows with a colored border.
-# ** Exclusive to Windows 11 due to API limitations.
+  inner_gap: 10
+  outer_gap: 10
 focus_borders:
   active:
     enabled: true
-    color: "#0000ff"
-
+    color: *red
   inactive:
     enabled: false
-    color: "#ff0000"
-
-###################################################################################################
-bars:
-###################################################################################################
-  - bind_to_monitor: 1
-    <<: *horizontal_bar
-  - bind_to_monitor: 2
-    <<: *vertical_bar
-
-
-horiz_bar: &horizontal_bar
+    color: *peach
+general:
+  # Whether to show floating windows as always on top.
+  show_floating_on_top: true
+  window_animations: true
+bar:
   height: "30px"
   position: "top"
-  opacity: 0.8
-  background: *bar_primary
-  foreground: *bar_text
-  font_family: "JetBrainsMono Nerd Font Bold"
-  font_size: "12px"
+  opacity: 1.0
+  background: *crust
+  foreground: *lavender
+  font_family: "Iosevka Nerd Font"
+  font_size: "13px"
   padding: "4px 6px"
   offset_x: 10
   offset_y: 10
-  border_radius: 5
-  
-  component_separator:
-    label: " "
+  border_radius: 15
   components_left:
-  # This is a hack to display an icon
-  - type: "text"
-    foreground: *bar_secondary
-    text: ""
-    padding: "0 8px"
-    font_size: "15px"
-  - type: "workspaces"
-    focused_workspace_background: *bar_secondary
-    displayed_workspace_background: "#00000033"
-    default_workspace_background: "transparent"
+    - type: "workspaces"
+      # current active workspace
+      focused_workspace_background: *crust
+      focused_workspace_foreground: *sky
+      # inactive, but displayed on other monitor workspace
+      displayed_workspace_background: "transparent"
+      displayed_workspace_foreground: *subtext1
+      # inactive workspace
+      default_workspace_background: "transparent"
+      margin: "0px 10px 0px 0px"
   components_center:
     - type: "window title"
   components_right:
     - type: "system tray"
-      label_expand_text: "<"
-      label_collapse_text: ">"
-    - type: "volume"
-      foreground: *bar_secondary
-      label_low: " <attr fg='white'>{volume_level}%</attr>"
-      label_medium: "󰕾 <attr fg='white'>{volume_level}%</attr>"
-      label_high: " <attr fg='white'>{volume_level}%</attr>"
-      label_mute: "󰝟 <attr fg='white'>{volume_level}%</attr>"
-    - type: "music"
-      foreground: *bar_secondary
-      label_not_playing: ""
-      label_playing: "󰓇 <attr fg='white'>{song_title} - {artist_name}</attr>"
-      max_title_length: 20
-      max_artist_length: 20
+      padding: "4px 6px"
+      foreground: *blue
+      
     - type: "tiling direction"
       label_horizontal: "⮂"
       label_vertical: "⮁"
-      margin: "0 2px"
-      padding: "0 4px"
-    - type: "binding mode"
-      background: *bar_secondary
-      margin: "0 4px 0 0"
+      background: *surface0
+      foreground: *lavender
       padding: "0 8px"
-    - type: "cpu"
-      foreground: *bar_secondary
-      label: "CPU:<attr fg='white'>{percent_usage}%</attr>"
-      refresh_interval_ms: 1000
-    - type: "gpu"
-      foreground: *bar_secondary
-      label: "GPU:<attr fg='white'>{percent_usage}%</attr>"
-      refresh_interval_ms: 1000
-    - type: "memory"
-      foreground: *bar_secondary
-      label: "RAM:<attr fg='white'>{percent_usage}%</attr>"
-      refresh_interval_ms: 1000
+      margin: "0 4px"
     - type: "clock"
-      foreground: *bar_secondary
-      # Documentation on formatting date/time string:
-      # https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
-      time_formatting: "ddd MMM d"
-    - type: "clock"
-      foreground: *bar_secondary
-      # Documentation on formatting date/time string:
-      # https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
-      time_formatting: "hh:mm tt"
+      foreground: *lavender
+      time_formatting: "ddd MMM d hh:mm:ss tt  "
+      margin: "0 0 0 10px"
+    - type: "weather"
+      latitude: 59.260860
+      longitude: 18.023440
+      label: "{temperature_celsius}°C"
+      label_sun: "☀️ {temperature_celsius}°C"
+      label_moon: "🌙 {temperature_celsius}°C"
+      label_cloud_moon: "🌙☁️ {temperature_celsius}°C"
+      label_cloud_sun: "⛅ {temperature_celsius}°C"
+      label_cloud_moon_rain: "🌙🌧️ {temperature_celsius}°C"
+      label_cloud_sun_rain: "🌦️ {temperature_celsius}°C"
+      label_cloud_rain: "🌧️ {temperature_celsius}°C"
+      label_snow_flake: "❄️ {temperature_celsius}°C"
+      label_thunderstorm: "⚡ {temperature_celsius}°C"
+      label_cloud: "☁️ {temperature_celsius}°C"
 
-vert_bar: &vertical_bar
-  << : *horizontal_bar
-  components_right:
-    - type: "clock"
-      foreground: *bar_secondary
-      # Documentation on formatting date/time string:
-      # https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
-      time_formatting: "ddd MMM d"
-    - type: "clock"
-      foreground: *bar_secondary
-      # Documentation on formatting date/time string:
-      # https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
-      time_formatting: "hh:mm tt"
 workspaces:
-  - name: "1"    
-    display_name: "1"
-    keep_alive: true
+  - name: "1"
+    display_name: "1) ⌨️ messaging"
   - name: "2"
-    display_name: "2"
+    display_name: "2) 📄 editor"
   - name: "3"
+    display_name: "3) 🌐 web"
   - name: "4"
+    display_name: "4) 🖥 workspace"
   - name: "5"
+    display_name: "5) 🎵 multimedia"
   - name: "6"
-    bind_to_monitor: 2
+    display_name: "6)"
   - name: "7"
-    bind_to_monitor: 2
+    display_name: "7"
   - name: "8"
-    bind_to_monitor: 2
+    display_name: "8"
   - name: "9"
-    display_name: "Vertical"
-    bind_to_monitor: 2
-    keep_alive: true
+    display_name: "9) 🎮 gaming"
+
 
 window_rules:
   # Task Manager requires admin privileges to manage and should be ignored unless running
@@ -170,19 +123,18 @@ window_rules:
   - command: "ignore"
     match_process_name: "/Taskmgr|ScreenClippingHost/"
 
+  - command: "ignore"
+    match_process_name: "/Flow.Launcher/"
+
   # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
   - command: "set floating"
     match_class_name: "#32770"
 
-  # Do not manage picture-in-picture windows for browsers. Note that the default is for
-  # English; change `match_title` to the window's title if you use another language.
-  - command: "ignore"
-    match_title: "[Pp]icture.in.[Pp]icture"
-    match_class_name: "Chrome_WidgetWin_1|MozillaDialogClass"
-
   # Some applications (eg. Steam) have borders that extend past the normal border size.
   - command: "resize borders 0px -7px -7px -7px"
     match_process_name: "steam"
+  - command: "resize borders 0px -5px -5px -5px"
+    match_process_name: "chrome"
 
 binding_modes:
   - name: "resize"
@@ -203,13 +155,13 @@ binding_modes:
 keybindings:
   # Shift focus in a given direction.
   - command: "focus left"
-    bindings: ["Alt+H", "Alt+Left"]
+    bindings: ["Alt+H"]
   - command: "focus right"
-    bindings: ["Alt+L", "Alt+Right"]
+    bindings: ["Alt+L"]
   - command: "focus up"
-    bindings: ["Alt+K", "Alt+Up"]
+    bindings: ["Alt+K"]
   - command: "focus down"
-    bindings: ["Alt+J", "Alt+Down"]
+    bindings: ["Alt+J"]
 
   # Move focused window in a given direction.
   - command: "move left"
@@ -242,11 +194,11 @@ keybindings:
 
   # Change focus between floating / tiling windows.
   - command: "focus mode toggle"
-    binding: "Alt+F"
+    binding: "Alt+Shift+T"
 
   # Change the focused window to be floating / tiling.
   - command: "toggle floating"
-    binding: "Shift+Alt+F"
+    binding: "Alt+T"
 
   # Change the focused window to be maximized / unmaximized.
   - command: "toggle maximized"
@@ -270,25 +222,19 @@ keybindings:
 
   # Launch CMD terminal (alternatively `exec wt` or `exec %ProgramFiles%/Git/git-bash.exe`
   # to start Windows Terminal and Git Bash respectively.
-  - command: "exec wt"
-    binding: "Alt+Enter"
+  # - command: "exec pwsh"
+    #  binding: "Alt+Enter"
 
-  - command: "exec Chrome"
-    binding: "Alt+B"
   # Focus the workspace that last had focus.
   - command: "focus workspace recent"
     binding: "Alt+Y"
 
   # Focus the next/previous workspace defined in `workspaces` config.
   - command: "focus workspace next"
-    binding: "Alt+T"
+    binding: "Ctrl+Alt+L"
   - command: "focus workspace prev"
-    binding: "Alt+Shift+T"
-  - command: "exec 'C:/Users/Slava/AppData/Local/Obsidian/Obsidian.exe'"
-    binding: "Alt+Ctrl+O"
-    
-  - command: "exec code"
-    binding: "Alt+C"
+    binding: "Ctrl+Alt+H"
+
   # Change focus to a workspace defined in `workspaces` config.
   - command: "focus workspace 1"
     binding: "Alt+1"
@@ -311,13 +257,13 @@ keybindings:
 
   # Move focused workspace to a monitor in a given direction.
   - command: "move workspace left"
-    binding: "Alt+Ctrl+Q"
+    binding: "Alt+Q"
   - command: "move workspace right"
-    binding: "Alt+Ctrl+F"
+    binding: "Alt+F"
   - command: "move workspace up"
-    binding: "Alt+Ctrl+D"
+    binding: "Alt+D"
   - command: "move workspace down"
-    binding: "Alt+Ctrl+S"
+    binding: "Alt+S"
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ["move to workspace 1", "focus workspace 1"]
@@ -337,4 +283,4 @@ keybindings:
   - commands: ["move to workspace 8", "focus workspace 8"]
     binding: "Alt+Shift+8"
   - commands: ["move to workspace 9", "focus workspace 9"]
-    binding: "Alt+Shift+9"
+    bindings: ["Alt+Shift+9"]
