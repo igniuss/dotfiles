@@ -1,13 +1,28 @@
 [helpers]
 
 [default]
-depends = []
+depends = ["shell", "cargo"]
 
 [default.files]
-".bashrc" = "~/.bashrc"
+".glaze-wm/"="~/.glaze-wm/"
+
+[default.variables]
+
+[shell.files]
 ".config/starship.toml" = "~/.config/starship.toml"
+# "atuin.toml" =  { type="symbolic", target="~/.config/atuin/config.toml", if='(is_executable "atuin"'}
 "gitconfigs/.gitconfig" = "~/.gitconfig"
 "gitconfigs/.gitconfig-personal" = "~/.gitconfig-personal"
 "gitconfigs/.gitconfig-work" = "~/.gitconfig-work"
-".glaze-wm/"="~/.glaze-wm/"
-[default.variables]
+"atuin.toml" = { type = "symbolic", target = "~/.config/atuin/config.toml", if = '(is_executable "atuin")'}
+[bash]
+depends = ["shell"]
+
+[bash.files]
+".bashrc" = "~/.bashrc"
+
+[cargo]
+
+[cargo.files]
+".cargo/.crates.toml" = "~/.cargo/.crates.toml"
+".cargo/.crates2.json" = "~/.cargo/.crates2.json"
