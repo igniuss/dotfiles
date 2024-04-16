@@ -26,9 +26,19 @@ mantle: &mantle "#181825"
 crust: &crust "#11111b"
 
 
-gaps:
-  inner_gap: 10
-  outer_gap: 10
+# gaps:
+#   # Add more spacing at the top.
+#   outer_gap: '45px 20px 20px 20px'
+
+# bar:
+#   # Disable the built-in GlazeWM bar.
+#   enabled: false
+
+general:
+  # Whether to show floating windows as always on top.
+  show_floating_on_top: true
+  window_animations: true
+
 focus_borders:
   active:
     enabled: true
@@ -36,10 +46,10 @@ focus_borders:
   inactive:
     enabled: false
     color: *peach
-general:
-  # Whether to show floating windows as always on top.
-  show_floating_on_top: true
-  # window_animations: true
+
+gaps:
+  inner_gap: 10
+  outer_gap: 10
 bar:
   height: "30px"
   position: "top"
@@ -118,11 +128,20 @@ workspaces:
 
 
 window_rules:
+  # Ignore the bar window.
+  - command: 'ignore'
+    match_process_name: '/Zebar/'
+
   # Task Manager requires admin privileges to manage and should be ignored unless running
   # the WM as admin.
   - command: "ignore"
     match_process_name: "/Taskmgr|ScreenClippingHost/"
 
+
+  - command: "ignore"
+    match_process_name: "/SnippingTool/"
+  - command: "ignore"
+    match_process_name: "/bitwarden/"
   - command: "ignore"
     match_process_name: "/Flow.Launcher/"
 

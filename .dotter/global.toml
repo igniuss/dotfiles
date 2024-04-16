@@ -5,6 +5,7 @@ depends = ["shell", "cargo", "bash"]
 
 [default.files]
 ".glaze-wm/" = "~/.glaze-wm/"
+".glzr/zebar/" = { type = "symbolic", target = "~/.glzr/zebar/" }
 
 [default.variables]
 
