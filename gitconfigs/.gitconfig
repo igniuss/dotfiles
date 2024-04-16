@@ -1,8 +1,3 @@
-[includeIf "gitdir:~/projects/works"]
-    path = .gitconfig-work
-[includeIf "gitdir:~/projects/personal"]
-    path = .gitconfig-personal
-
 [core]
 	editor = code --wait
 	compression = 0
@@ -27,11 +22,6 @@
 	aliases = config --get-regexp alias
 	ch = !git checkout $(git branch --sort="-committerdate" | head -n 200 | fzf)
 
-[includeIf "gitdir:~/projects/work/"]
-    path = ~/.ssh/.gitconfig-work
-[includeIf "gitdir:~/projects/personal/"]
-    path = ~/.ssh/.gitconfig-personal
-
 [http]
 	postBuffer = 524288000
 [filter "lfs"]
@@ -43,3 +33,8 @@
 	name = Sean L.
 	email = slava_be@hotmail.com
 	autoSetupRemote = true
+
+[includeIf "gitdir:~/projects/work/"]
+    path = "~/.gitconfig-work"
+[includeIf "gitdir:~/projects/personal/"]
+    path = "~/.gitconfig-personal"
