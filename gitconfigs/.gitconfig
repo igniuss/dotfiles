@@ -21,7 +21,7 @@
 	everything = !git pull && git submodule update --init --recursive
 	aliases = config --get-regexp alias
 	ch = !git checkout $(git branch --sort="-committerdate" | head -n 200 | fzf)
-
+	rs = !git add . && git reset --hard
 [http]
 	postBuffer = 524288000
 [filter "lfs"]

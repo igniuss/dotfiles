@@ -49,8 +49,9 @@ focus_borders:
 
 gaps:
   inner_gap: 10
-  outer_gap: 10
+  outer_gap: '45px 10px 15px 10px'
 bar:
+  enabled: false
   height: "30px"
   position: "top"
   opacity: 1.0
@@ -145,6 +146,11 @@ window_rules:
   - command: "ignore"
     match_process_name: "/Flow.Launcher/"
 
+  - command: "ignore"
+    match_class_name: "/.*Dialog/"
+  - command: "ignore"
+    match_class_name: "/.*Splash.*/"
+    
   # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
   - command: "set floating"
     match_class_name: "#32770"
@@ -154,6 +160,9 @@ window_rules:
     match_process_name: "steam"
   - command: "resize borders 0px -5px -5px -5px"
     match_process_name: "chrome"
+
+  # - command: "set minimized"
+  #   match_process_name: "/glaalt/"
 
 binding_modes:
   - name: "resize"
@@ -303,3 +312,6 @@ keybindings:
     binding: "Alt+Shift+8"
   - commands: ["move to workspace 9", "focus workspace 9"]
     bindings: ["Alt+Shift+9", "Alt+Shift+0"]
+
+  - command: "exec wt"
+    binding: "Alt+Enter"

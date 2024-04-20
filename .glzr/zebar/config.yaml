@@ -18,7 +18,7 @@ window/bar:
   # Width of the window in physical pixels.
   width: '{{ self.args.MONITOR_WIDTH }}'
   # Height of the window in physical pixels.
-  height: '25'
+  height: '35'
   # X-position of the window in physical pixels.
   position_x: '{{ self.args.MONITOR_X }}'
   # Y-position of the window in physical pixels.
@@ -27,7 +27,7 @@ window/bar:
   # Allowed values: 'always_on_top', 'always_on_bottom', 'normal'.
   z_order: 'always_on_top'
   # Whether the window should be shown in the taskbar.
-  show_in_taskbar: true
+  show_in_taskbar: false
   # Whether the window should have resize handles.
   resizable: false
   # Styles to apply globally within the window. For example, we can use
@@ -35,137 +35,143 @@ window/bar:
   # for a cheatsheet of available Nerdfonts icons.
   global_styles: |
     @import "https://www.nerdfonts.com/assets/css/webfont.css";
+    * {
+      color: #cdd6f4;
+    }
   # CSS/SCSS styles to apply to the root element within the window.
   styles: |
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    height: 100%;
-    color: #ffffffe6;
+    margin: 5px 10px 0px 10px;
+    border-radius: 15px;
+    height: 30px;
     font-family: ui-monospace, monospace;
     font-size: 13px;
-    padding: 4px 24px;
-    border-bottom: 1px solid #ffffff08;
-    background: linear-gradient(
-      rgba(14, 14, 28, 0.95),
-      rgba(26, 14, 28, 0.85),
-    );
-  group/left:
+    background-color: #313244;
+    padding: 0px 15px;
+  group/test:
     styles: |
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
       align-items: center;
-
-    template/logo:
-      styles: |
-        margin-right: 20px;
-      template: |
-        <i class="nf nf-fa-windows"></i>
-
-    template/glazewm:
+      height: 100%;
+      width: 100%;
+    group/left:
       styles: |
         display: flex;
         align-items: center;
+        border-radius: 15px;
+        height:100%;
+        min-width: 30px;
+      template/logo:
+        providers: ['host']
+        styles: |
+          margin-right: 10px;
+          margin-left: -3px;
+          font-size:25px;
+        template: |
+          <i class="wobble nf nf-md-clippy"></i>
 
-        .workspace {
-          background: rgba(255, 255, 255, 0.05);
-          margin-right: 4px;
-          width: 30px;
-          height: 30px;
-          color: #ffffffe6;
-          border: none;
-          border-radius: 2px;
-        }
-      providers: ['glazewm']
-      template: |
-        @for (workspace of glazewm.workspacesOnMonitor) {
-          <button class="workspace">{{ workspace.name }}</button>
-        }
+      template/glazewm:
+        styles: |
+          display: flex;
+          align-items: center;
 
-  group/center:
-    styles: |
-      justify-self: center;
+          .workspace {
+            background: rgba(255, 255, 255, 0.15);
+            margin-right: 15px;
+            min-width: 30px;
+            height: 20px;
+            border: none;
+            border-radius: 5px;
+            padding: 0px 10px;
+            vertical-align: middle;
+          }
+          .nf {
+            color: white;
+          }
+          
+        providers: ['glazewm']
+        template: |
+          @for (workspace of glazewm.workspacesOnMonitor) {
+            <button class="workspace" onclick="test()">{{workspace.name}}) 
+              @switch (workspace.name) {
+                @case ('1') { <i class="nf nf-md-message_badge"></i>}
+                @case ('2') { <i class="nf nf-cod-code"></i>}
+                @case ('3') { <i class="nf nf-md-web"></i>}
+                @case ('4') { <i class="nf nf-md-monitor_dashboard"></i>}
+                @case ('5') { <i class="nf nf-seti-notebook"></i>}
+                @case ('6') { }
+                @case ('7') { }
+                @case ('8') { }
+                @case ('9') { <i class="nf nf-md-microsoft_xbox_controller_battery_low"></i> Gaming }
+                @default    { ERROR }
+              }
+            </button>
 
-    template/clock:
-      providers: ['date']
-      # Available date tokens: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
-      template: |
-        {{ date.toFormat(date.now, 'EEE	d MMM t') }}
+          }
 
-  group/right:
-    styles: |
-      justify-self: end;
-      display: flex;
-
-      .template {
-        margin-left: 20px;
-      }
-
-      i {
-        color: #7481b2e1;
-        margin-right: 7px;
-      }
-
-    template/memory:
-      providers: ['memory']
-      template: |
-        <i class="nf nf-fae-chip"></i>
-        {{ Math.round(memory.usage) }}%
-
-    template/cpu:
-      providers: ['cpu']
+    group/center:
       styles: |
-        .high-usage {
-          color: #900029;
-        }
-      template: |
-        <i class="nf nf-oct-cpu"></i>
+        justify-self: center;
 
-        <!-- Change the text color if the CPU usage is high. -->
-        @if (cpu.usage > 85) {
-          <span class="high-usage">{{ Math.round(cpu.usage) }}%</span>
-        } @else {
-          <span>{{ Math.round(cpu.usage) }}%</span>
-        }
+      template/clock:
+        providers: ['date']
+        # Available date tokens: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
+        template: |
+          {{ date.toFormat(date.now, 'EEE	d MMM t') }}
 
-    template/battery:
-      providers: ['battery']
+    group/right:
       styles: |
-        position: relative;
+        justify-self: end;
+        display: flex;
 
-        .charging-icon {
-          position: absolute;
-          font-size: 11px;
-          left: 7px;
-          top: 2px;
+        .template {
+          margin-left: 20px;
         }
-      template: |
-        <!-- Show icon for whether battery is charging. -->
-        @if (battery.isCharging) {<i class="nf nf-md-power_plug charging-icon"></i>}
 
-        <!-- Show icon for how much of the battery is charged. -->
-        @if (battery.chargePercent > 90) {<i class="nf nf-fa-battery_4"></i>}
-        @else if (battery.chargePercent > 70) {<i class="nf nf-fa-battery_3"></i>}
-        @else if (battery.chargePercent > 40) {<i class="nf nf-fa-battery_2"></i>}
-        @else if (battery.chargePercent > 20) {<i class="nf nf-fa-battery_1"></i>}
-        @else {<i class="nf nf-fa-battery_0"></i>}
-
-        {{ Math.round(battery.chargePercent) }}%
-
-    template/weather:
-      providers: ['weather']
-      template: |
-        @switch (weather.status) {
-          @case ('clear_day') {<i class="nf nf-weather-day_sunny"></i>}
-          @case ('clear_night') {<i class="nf nf-weather-night_clear"></i>}
-          @case ('cloudy_day') {<i class="nf nf-weather-day_cloudy"></i>}
-          @case ('cloudy_night') {<i class="nf nf-weather-night_alt_cloudy"></i>}
-          @case ('light_rain_day') {<i class="nf nf-weather-day_sprinkle"></i>}
-          @case ('light_rain_night') {<i class="nf nf-weather-night_alt_sprinkle"></i>}
-          @case ('heavy_rain_day') {<i class="nf nf-weather-day_rain"></i>}
-          @case ('heavy_rain_night') {<i class="nf nf-weather-night_alt_rain"></i>}
-          @case ('snow_day') {<i class="nf nf-weather-day_snow"></i>}
-          @case ('snow_night') {<i class="nf nf-weather-night_alt_snow"></i>}
-          @case ('thunder_day') {<i class="nf nf-weather-day_lightning"></i>}
-          @case ('thunder_night') {<i class="nf nf-weather-night_alt_lightning"></i>}
+        i {
+          margin-right: 7px;
         }
-        {{ weather.celsiusTemp }}°
+      template/host:
+        providers: ['host']
+        template: |
+          <span> {{host.friendlyOsVersion}} </span>
+      template/memory:
+        providers: ['memory']
+        template: |
+          <i class="nf nf-fae-chip"></i>
+          {{ Math.round(memory.usage) }}%
+
+      template/cpu:
+        providers: ['cpu']
+        styles: |
+          .high-usage {
+            color: #900029;
+          }
+        template: |
+          <i class="nf nf-oct-cpu"></i>
+
+          <!-- Change the text color if the CPU usage is high. -->
+          @if (cpu.usage > 85) {
+            <span class="high-usage">{{ Math.round(cpu.usage) }}%</span>
+          } @else {
+            <span>{{ Math.round(cpu.usage) }}%</span>
+          }
+
+      template/weather:
+        providers: ['weather']
+        template: |
+          @switch (weather.status) {
+            @case ('clear_day') {<i class="nf nf-weather-day_sunny"></i>}
+            @case ('clear_night') {<i class="nf nf-weather-night_clear"></i>}
+            @case ('cloudy_day') {<i class="nf nf-weather-day_cloudy"></i>}
+            @case ('cloudy_night') {<i class="nf nf-weather-night_alt_cloudy"></i>}
+            @case ('light_rain_day') {<i class="nf nf-weather-day_sprinkle"></i>}
+            @case ('light_rain_night') {<i class="nf nf-weather-night_alt_sprinkle"></i>}
+            @case ('heavy_rain_day') {<i class="nf nf-weather-day_rain"></i>}
+            @case ('heavy_rain_night') {<i class="nf nf-weather-night_alt_rain"></i>}
+            @case ('snow_day') {<i class="nf nf-weather-day_snow"></i>}
+            @case ('snow_night') {<i class="nf nf-weather-night_alt_snow"></i>}
+            @case ('thunder_day') {<i class="nf nf-weather-day_lightning"></i>}
+            @case ('thunder_night') {<i class="nf nf-weather-night_alt_lightning"></i>}
+          }
+          {{ weather.celsiusTemp }}°
