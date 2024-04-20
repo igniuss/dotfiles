@@ -1,7 +1,7 @@
 [helpers]
 
 [default]
-depends = ["shell", "cargo", "bash"]
+depends = ["shell", "cargo", "bash", "zsh"]
 
 [default.files]
 ".glaze-wm/" = "~/.glaze-wm/"
@@ -21,6 +21,12 @@ depends = ["shell"]
 
 [bash.files]
 ".bashrc" = "~/.bashrc"
+
+[zsh]
+depends = ["shell"]
+
+[zsh.files]
+".zshrc" = "~/.zshrc"
 
 [cargo]
 
