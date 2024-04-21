@@ -26,6 +26,7 @@
 "krabby 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)" = ["krabby.exe"]
 "macchina 6.1.8 (registry+https://github.com/rust-lang/crates.io-index)" = ["macchina.exe"]
 "oxker 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["oxker.exe"]
+"starship 1.18.2 (registry+https://github.com/rust-lang/crates.io-index)" = ["starship.exe"]
 "tauri-cli 2.0.0-beta.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-tauri.exe"]
 "trunk 0.19.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["trunk.exe"]
 "zoxide 0.9.4 (registry+https://github.com/rust-lang/crates.io-index)" = ["zoxide.exe"]
