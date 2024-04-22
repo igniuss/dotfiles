@@ -28,6 +28,10 @@ pacman_packages=(
     "hyprland"
     "kitty"
     "waybar"
+    "ttf-iosevkaterm-nerd"
+    "ttf-iosevka-nerd"
+    "ttf-meslo-nerd"
+    "ttf-cascadia-mono-nerd"
 )
 
 echo "Setting up Rust"
