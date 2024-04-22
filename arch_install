@@ -10,3 +10,24 @@ if is_missing cargo; then
   echo "missing cargo"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -- -y
 fi
+
+rust_packages=(
+  "dotter", 
+  "atuin",
+  "starship", 
+
+  "zoxide"
+  "bat", 
+  "eza",
+  "fend", 
+  "grex", 
+  "just", 
+  "bottom", 
+  "krabby", 
+)
+
+for value in "${rust_packages[@]}"
+do
+  local missing = is_missing $value
+  echo "Is $value installed? $missing"
+done
