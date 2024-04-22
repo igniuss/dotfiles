@@ -12,7 +12,7 @@ if is_missing cargo; then
   
   source "$HOME/.cargo/env"
 
-  cargo cargo-binstall
+  cargo install cargo-binstall
 fi
 
 rust_packages=(
@@ -31,13 +31,13 @@ rust_packages=(
   "bottom", 
   "krabby", 
 )
-
+missing_rust_packages = ""
 for value in "${rust_packages[@]}"
 do
   if is_missing $value; then
-    rust_packages+=$value
+    missing_rust_packages = "$missing_rust_packages $value"
   fi
 done
 
-cargo binstall "${missing_rust_packages}"
+cargo binstall "${missing_rust_packages}" --no-confirm
 
