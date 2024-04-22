@@ -9,7 +9,7 @@ function is_missing() {
 
 rust_packages=(
     "dotter"
-    "atuin",
+    "atuin"
     "starship"
     "just"
     
