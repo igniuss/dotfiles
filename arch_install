@@ -46,6 +46,7 @@ install_rust_packages() {
         
         cargo install cargo-binstall
     fi
+    
     local missing_rust_packages=" "
     for value in "${rust_packages[@]}"
     do
@@ -81,6 +82,6 @@ function setup_dotter() {
     echo "dotter setup done"
 }
 
-# install_rust_packages
-# install_system_packages
+install_rust_packages
+install_system_packages
 setup_dotter
