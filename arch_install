@@ -39,5 +39,5 @@ do
     missing_rust_packages+=" $value"
   fi
 done
-cargo binstall $missing_rust_packages --no-confirm
+cargo binstall $missing_rust_packages --no-confirm --no-discover-github-token
 
