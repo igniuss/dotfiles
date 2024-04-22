@@ -9,6 +9,9 @@ function is_missing() {
 if is_missing cargo; then
   echo "missing cargo"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+  
+  source "$HOME/.cargo/env"
+
   cargo cargo-binstall
 fi
 
