@@ -17,7 +17,7 @@ fi
 
 rust_packages=(
   "dotter", 
-  "atuin",
+  # "atuin",
   "starship", 
   "just", 
 
