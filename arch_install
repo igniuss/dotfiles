@@ -52,4 +52,20 @@ install_rust_packages() {
     cargo binstall ${missing_rust_packages} --no-confirm --no-discover-github-token
 }
 
+install_system_packages() {
+    
+    if is_missing yay; then
+        pacman -Syu yay
+    fi
+    local missing = " "
+    for value in "${pacman_packages[@]}"
+    do
+        if is_missing $value; then
+            missing+=" $value"
+        fi
+    done
+}
+
+
 install_rust_packages
+install_system_packages
