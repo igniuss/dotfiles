@@ -26,7 +26,7 @@ rust_packages=(
   "krabby", 
 )
 
-missing_rust_packages = ("")
+declare -a missing_rust_packages
 
 for value in "${rust_packages[@]}"
 do
