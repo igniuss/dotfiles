@@ -5,8 +5,8 @@ depends = ["shell", "zsh", "glazewm"]
 
 [glazewm]
 [glazewm.files]
-".glaze-wm/" = { target = "~/.glaze-wm/", type = "symbolic", if = "(eq dotter.os 'windows')" }
-".glzr/zebar/" = { target = "~/.glzr/zebar/", type = "symbolic", if = "(eq dotter.os 'windows')" }
+"windows/.glaze-wm/" = { target = "~/.glaze-wm/", type = "symbolic", if = "(eq dotter.os 'windows')" }
+"windows/.glzr/zebar/" = { target = "~/.glzr/zebar/", type = "symbolic", if = "(eq dotter.os 'windows')" }
 
 
 [default.variables]
