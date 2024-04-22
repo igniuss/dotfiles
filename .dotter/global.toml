@@ -1,12 +1,12 @@
 [helpers]
 
 [default]
-depends = ["shell", "zsh", "cargo", "glazewm"]
+depends = ["shell", "zsh", "glazewm"]
 
 [glazewm]
 [glazewm.files]
-".glaze-wm/" = { target = "~/.glaze-wm/", type="symbolic", if="(eq dotter.os 'Windows')" }
-".glzr/zebar/" = { target = "~/.glzr/zebar/", type="symbolic", if="(eq dotter.os 'Windows')" }
+".glaze-wm/" = { target = "~/.glaze-wm/", type = "symbolic", if = "(eq dotter.os 'windows')" }
+".glzr/zebar/" = { target = "~/.glzr/zebar/", type = "symbolic", if = "(eq dotter.os 'windows')" }
 
 
 [default.variables]
@@ -23,8 +23,3 @@ depends = ["shell"]
 
 [zsh.files]
 ".zshrc" = { target = "~/.zshrc", type = "symbolic" }
-
-[cargo]
-[cargo.files]
-".cargo/.crates.toml" = "~/.cargo/.crates.toml"
-".cargo/.crates2.json" = "~/.cargo/.crates2.json"
