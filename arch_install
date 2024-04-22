@@ -79,13 +79,15 @@ install_system_packages
 
 function setup_dotter() {
     
+    rm -f .dotter/local.toml
     touch .dotter/local.toml
+    
     echo "includes = []"            >> .dotter/local.toml
     echo "packages = [\"default\"]" >> .dotter/local.toml
     echo "[files]"                  >> .dotter/local.toml
     echo "[variables]"              >> .dotter/local.toml
     
-    local curr_hostname = $(hostname)
+    local curr_hostname="$(hostname)"
     sudo hostnamectl set-hostname hyprland
     # Now we want the hyprland specific configs
     dotter deploy -v -d
@@ -93,3 +95,4 @@ function setup_dotter() {
     sudo hostnamectl set-hostname ${curr_hostname}
 }
 
+setup_dotter
