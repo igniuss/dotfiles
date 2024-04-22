@@ -33,6 +33,8 @@ pacman_packages=(
     "ttf-meslo-nerd"
     "ttf-cascadia-mono-nerd"
     "zsh"
+    "network-manager-applet"
+    "dunst"
 )
 
 echo "Setting up Rust"
