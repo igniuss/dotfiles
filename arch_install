@@ -35,9 +35,9 @@ missing_rust_packages = " "
 for value in "${rust_packages[@]}"
 do
   if is_missing $value; then
-    cargo binstall "$value" --no-confirm
     missing_rust_packages+=" $value"
   fi
 done
-cargo binstall $missing_rust_packages --no-confirm --no-discover-github-token
+echo "missing packages: ${missing_rust_packages}"
+cargo binstall ${missing_rust_packages} --no-confirm --no-discover-github-token
 
