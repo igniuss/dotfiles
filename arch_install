@@ -8,31 +8,33 @@ function is_missing() {
 }
 if is_missing cargo; then
   echo "missing cargo"
-  # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -- -y
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -- -y
+  cargo cargo-binstall
 fi
 
 rust_packages=(
   "dotter", 
   "atuin",
   "starship", 
+  "just", 
 
   "zoxide"
   "bat", 
   "eza",
-  "fend", 
+  "ripgrep",
+
   "grex", 
-  "just", 
+  "fend", 
   "bottom", 
   "krabby", 
 )
 
-declare -a missing_rust_packages
-
 for value in "${rust_packages[@]}"
 do
   if is_missing $value; then
-    rust_packages-=$value
+    rust_packages+=$value
   fi
 done
 
-echo "${rust_packages}"
+cargo binstall "${missing_rust_packages}"
+
