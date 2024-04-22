@@ -28,6 +28,6 @@ rust_packages=(
 
 for value in "${rust_packages[@]}"
 do
-  local missing = is_missing $value
+  missing = is_missing $value
   echo "Is $value installed? $missing"
 done
