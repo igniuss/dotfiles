@@ -41,7 +41,7 @@ install_rust_packages() {
         
         cargo install cargo-binstall
     fi
-    local missing_rust_packages = " "
+    local missing_rust_packages=" "
     for value in "${rust_packages[@]}"
     do
         if is_missing $value; then
@@ -57,7 +57,7 @@ install_system_packages() {
     if is_missing yay; then
         pacman -Syu yay
     fi
-    local missing = " "
+    local missing=" "
     for value in "${pacman_packages[@]}"
     do
         if is_missing $value; then
