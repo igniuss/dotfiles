@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function is_missing() {
+  local application = $1
+  if ! command -v -- "${application}" > /dev/null 2>&1; then
+    return true
+  fi
+  return false
+}
+if is_missing cargo; then
+  echo "missing cargo"
+  # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
