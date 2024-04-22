@@ -69,7 +69,7 @@ install_system_packages() {
             missing+=" $value"
         fi
     done
-
+    
     sudo pacman -S ${missing}
 }
 
@@ -77,10 +77,19 @@ install_system_packages() {
 install_rust_packages
 install_system_packages
 
-touch .dotter/local.toml
-echo "includes = []"            >> .dotter/local.toml
-echo "packages = [\"default\"]" >> .dotter/local.toml
-echo "[files]"                  >> .dotter/local.toml
-echo "[variables]"              >> .dotter/local.toml
+function setup_dotter() {
+    
+    touch .dotter/local.toml
+    echo "includes = []"            >> .dotter/local.toml
+    echo "packages = [\"default\"]" >> .dotter/local.toml
+    echo "[files]"                  >> .dotter/local.toml
+    echo "[variables]"              >> .dotter/local.toml
+    
+    local curr_hostname = $(hostname)
+    sudo hostnamectl set-hostname hyprland
+    # Now we want the hyprland specific configs
+    dotter deploy -v -d
 
-dotter deploy
+    sudo hostnamectl set-hostname ${curr_hostname}
+}
+
