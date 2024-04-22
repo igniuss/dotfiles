@@ -1,43 +1,55 @@
 #!/bin/bash
 
 function is_missing() {
-  if ! command -v -- "$1" > /dev/null 2>&1; then
-    return 0
-  fi
-  return 1
+    if ! command -v -- "$1" > /dev/null 2>&1; then
+        return 0
+    fi
+    return 1
 }
-if is_missing cargo; then
-  echo "missing cargo"
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
-  
-  source "$HOME/.cargo/env"
-
-  cargo install cargo-binstall
-fi
 
 rust_packages=(
-  "dotter"
-  # "atuin",
-  "starship"
-  "just"
-
-  "zoxide"
-  "bat"
-  "eza"
-  "ripgrep"
-
-  "grex"
-  "fend"
-  "bottom"
-  "krabby"
+    "dotter"
+    "atuin",
+    "starship"
+    "just"
+    
+    "zoxide"
+    "bat"
+    "eza"
+    "ripgrep"
+    
+    "grex"
+    "fend"
+    "bottom"
+    "krabby"
 )
-missing_rust_packages = " "
-for value in "${rust_packages[@]}"
-do
-  if is_missing $value; then
-    missing_rust_packages+=" $value"
-  fi
-done
-echo "missing packages: ${missing_rust_packages}"
-cargo binstall ${missing_rust_packages} --no-confirm --no-discover-github-token
 
+pacman_packages=(
+    "hyprland"
+    "kitty"
+    "waybar"
+)
+
+echo "Setting up Rust"
+
+install_rust_packages() {
+    if is_missing cargo; then
+        echo "missing cargo"
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+        
+        source "$HOME/.cargo/env"
+        
+        cargo install cargo-binstall
+    fi
+    local missing_rust_packages = " "
+    for value in "${rust_packages[@]}"
+    do
+        if is_missing $value; then
+            missing_rust_packages+=" $value"
+        fi
+    done
+    echo "missing packages: ${missing_rust_packages}"
+    cargo binstall ${missing_rust_packages} --no-confirm --no-discover-github-token
+}
+
+install_rust_packages
