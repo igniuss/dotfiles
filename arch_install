@@ -31,11 +31,8 @@ declare -a missing_rust_packages
 for value in "${rust_packages[@]}"
 do
   if is_missing $value; then
-    missing_rust_packages+=$value
+    rust_packages-=$value
   fi
 done
 
-for value in "${missing_rust_packages}"
-do
-  echo "missing $value"
-done
+echo "${rust_packages}"
