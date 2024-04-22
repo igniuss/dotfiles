@@ -25,7 +25,8 @@ rust_packages=(
   "bottom", 
   "krabby", 
 )
-missing_rust_packages = ()
+
+missing_rust_packages = ("")
 
 for value in "${rust_packages[@]}"
 do
