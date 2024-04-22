@@ -77,7 +77,7 @@ install_system_packages() {
 function setup_dotter() {
     rm -f .dotter/local.toml
     # Now we want the hyprland specific configs
-    dotter deploy -l -f .dotter/hyprland.conf
+    dotter deploy -f -l .dotter/hyprland.conf
 }
 
 # install_rust_packages
