@@ -32,6 +32,7 @@ pacman_packages=(
     "ttf-iosevka-nerd"
     "ttf-meslo-nerd"
     "ttf-cascadia-mono-nerd"
+    "zsh"
 )
 
 echo "Setting up Rust"
@@ -75,3 +76,5 @@ install_system_packages() {
 
 install_rust_packages
 install_system_packages
+
+dotter init

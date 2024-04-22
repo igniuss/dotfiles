@@ -1,11 +1,13 @@
 [helpers]
 
 [default]
-depends = ["shell", "cargo", "bash", "zsh"]
+depends = ["shell", "zsh", "cargo", "glazewm"]
 
-[default.files]
-".glaze-wm/" = "~/.glaze-wm/"
-".glzr/zebar/" = { type = "symbolic", target = "~/.glzr/zebar/" }
+[glazewm]
+[glazewm.files]
+".glaze-wm/" = { target = "~/.glaze-wm/", type="symbolic", if="(eq dotter.os 'Windows')" }
+".glzr/zebar/" = { target = "~/.glzr/zebar/", type="symbolic", if="(eq dotter.os 'Windows')" }
+
 
 [default.variables]
 
@@ -16,20 +18,13 @@ depends = ["shell", "cargo", "bash", "zsh"]
 "gitconfigs/.gitconfig-work" = "~/.gitconfig-work"
 "atuin.toml" = { type = "symbolic", target = "~/.config/atuin/config.toml", if = '(is_executable "atuin")' }
 
-[bash]
-depends = ["shell"]
-
-[bash.files]
-".bashrc" = "~/.bashrc"
-
 [zsh]
 depends = ["shell"]
 
 [zsh.files]
-".zshrc" = "~/.zshrc"
+".zshrc" = { target = "~/.zshrc", type = "symbolic" }
 
 [cargo]
-
 [cargo.files]
 ".cargo/.crates.toml" = "~/.cargo/.crates.toml"
 ".cargo/.crates2.json" = "~/.cargo/.crates2.json"
