@@ -64,6 +64,8 @@ install_system_packages() {
             missing+=" $value"
         fi
     done
+
+    pacman -S ${missing}
 }
 
 
