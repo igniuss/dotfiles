@@ -25,10 +25,16 @@ rust_packages=(
   "bottom", 
   "krabby", 
 )
+missing_rust_packages = ()
 
 for value in "${rust_packages[@]}"
 do
   if is_missing $value; then
-    echo "missing $value"
+    missing_rust_packages += $value
   fi
+done
+
+for value in "${missing_rust_packages}"
+do
+  echo "missing $value"
 done
